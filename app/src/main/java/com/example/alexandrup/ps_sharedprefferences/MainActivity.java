@@ -93,4 +93,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void openGsonActiv(View view) {
+        Intent i = new Intent(this, GSON_Activ.class);
+        startActivity(i);
+    }
 }
