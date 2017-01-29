@@ -34,10 +34,16 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void clearAccountData(View view) {
-
+        SharedPreferences sp = getSharedPreferences(getPackageName()+Constants.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.apply();
     }
 
     public void removeProfessionKey(View view) {
-
+        SharedPreferences sp = getSharedPreferences(getPackageName()+Constants.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(Constants.KEY_PROFESSION);
+        editor.apply();
     }
 }

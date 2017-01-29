@@ -3,9 +3,11 @@ package com.example.alexandrup.ps_sharedprefferences;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -32,6 +34,31 @@ public class MainActivity extends AppCompatActivity {
 
         pageLayout = (LinearLayout) findViewById(R.id.pageLayout);
         pageColorSwitch = (Switch) findViewById(R.id.pageColorSwitch);
+
+        pageColorSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
+                setPageColor(isChecked);
+
+
+            }
+        });
+
+        //retrieve value from activity level shared prefs
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        boolean isChecked = sharedPreferences.getBoolean("green", false);
+        pageColorSwitch.setChecked(isChecked);
+    }
+
+    private void setPageColor(boolean isChecked) {
+
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE); //activity level
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("green", isChecked);
+        editor.apply();
+
+        pageLayout.setBackgroundColor(isChecked? Color.GREEN : Color.WHITE);
     }
 
     public void saveAccountData(View view) {
